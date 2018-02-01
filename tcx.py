@@ -18,6 +18,7 @@ import sys
 import re
 
 
+
 def findtext(e, name, default=None):
     """
     findtext
@@ -81,7 +82,6 @@ def parsetcx(xml):
             # note: adjust for timezone?
             timestamp = findtext(point, 'Time')
             if timestamp:
-                #seconds = strftime('%s', strptime(timestamp, '%Y-%m-%dT%H:%M:%SZ'))
                 seconds = timestamp
             else:
                 seconds = None
@@ -120,9 +120,7 @@ def parsetcx(xml):
 
     return points
 
-    hr = []
-    for point in points:
-        hr.append(point[8])
+
         
 
 if __name__=='__main__':
@@ -143,3 +141,22 @@ if __name__=='__main__':
     # (activity, lap, timestamp, seconds, lat, long, alt, dist, heart, cad)
     for point in points:
         ostream.write(delim.join(map(str, point))+'\n')
+
+
+    #plot heart rate
+    t = [] #time in seconds
+    # bb = strptime(points[-2][3], '%Y-%m-%dT%H:%M:%S.%fZ')
+    #  aa = strptime(point[3], '%Y-%m-%dT%H:%M:%S.%fZ')
+    #import time
+
+    #t1 = time.mktime(aa)
+
+    #t2 = time.mktime(bb)
+
+#   t2-t1
+    hr = [] #hear rate in beat per minutes
+    for point in points:
+        hr.append(point[8])
+        seconds = strftime('%s', strptime(point[3], '%Y-%m-%dT%H:%M:%SZ'))
+        t.append(seconds)
+        
